@@ -113,16 +113,6 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         else:
             raise ImproperlyConfigured(self.settings_is_missing % 'ACCOUNT')
 
-        if settings_dict.get('WAREHOUSE'):
-            conn_params['warehouse'] = self.ops.quote_name(settings_dict['WAREHOUSE'])
-        else:
-            raise ImproperlyConfigured(self.settings_is_missing % 'WAREHOUSE')
-
-        if settings_dict.get('SCHEMA'):
-            conn_params['schema'] = self.ops.quote_name(settings_dict['SCHEMA'])
-        else:
-            raise ImproperlyConfigured(self.settings_is_missing % 'SCHEMA')
-
         return conn_params
 
     def get_new_connection(self, conn_params):
