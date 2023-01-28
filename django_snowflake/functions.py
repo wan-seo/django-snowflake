@@ -7,8 +7,7 @@ if django.VERSION[0] >= 3:
     )
 else:
     from django.db.models.functions import (
-        SHA224, SHA256, SHA384, SHA512, Ceil, Collate, ConcatPair, Random,
-        StrIndex,
+        Ceil, ConcatPair, StrIndex,
     )
 
     
