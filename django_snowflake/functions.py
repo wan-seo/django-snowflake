@@ -1,6 +1,5 @@
 from django.db.models.functions import (
-    SHA224, SHA256, SHA384, SHA512, Ceil, Collate, ConcatPair, Random,
-    StrIndex,
+    Ceil, ConcatPair, StrIndex,
 )
 
 
@@ -41,12 +40,6 @@ def strindex(self, compiler, connection, **extra_context):
 
 
 def register_functions():
-    SHA224.as_snowflake = SHA224.as_mysql
-    SHA256.as_snowflake = SHA256.as_mysql
-    SHA384.as_snowflake = SHA384.as_mysql
-    SHA512.as_snowflake = SHA512.as_mysql
     Ceil.as_snowflake = ceil
-    Collate.as_snowflake = collate
     ConcatPair.as_snowflake = concatpair
-    Random.as_snowflake = random
     StrIndex.as_snowflake = strindex
