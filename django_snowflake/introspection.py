@@ -1,14 +1,19 @@
+import django
+
 from collections import namedtuple
 
 from django.db.backends.base.introspection import (
     BaseDatabaseIntrospection, FieldInfo as BaseFieldInfo, TableInfo,
 )
-from django.utils.regex_helper import _lazy_re_compile
+if django.VERSION[0] >= 3:
+    from django.utils.regex_helper import _lazy_re_compile as re_compile
+else:
+    from re import compile as re_compile
 
 FieldInfo = namedtuple('FieldInfo', BaseFieldInfo._fields + ('pk',))
-collation_re = _lazy_re_compile(r"^VARCHAR\(\d+\) COLLATE '([\w+\-]+)'$")
-field_size_re = _lazy_re_compile(r'^[A-Z]+\((\d+)\)')
-precision_and_scale_re = _lazy_re_compile(r'^NUMBER\((\d+),(\d+)\)$')
+collation_re = re_compile(r"^VARCHAR\(\d+\) COLLATE '([\w+\-]+)'$")
+field_size_re = re_compile(r'^[A-Z]+\((\d+)\)')
+precision_and_scale_re = re_compile(r'^NUMBER\((\d+),(\d+)\)$')
 
 
 def get_collation(name):
