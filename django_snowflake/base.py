@@ -1,6 +1,5 @@
 from django.core.exceptions import ImproperlyConfigured
 from django.db.backends.base.base import BaseDatabaseWrapper
-from django.utils.asyncio import async_unsafe
 
 try:
     import snowflake.connector as Database
@@ -126,7 +125,6 @@ class DatabaseWrapper(BaseDatabaseWrapper):
 
         return conn_params
 
-    @async_unsafe
     def get_new_connection(self, conn_params):
         return Database.connect(**conn_params)
 
@@ -150,7 +148,6 @@ class DatabaseWrapper(BaseDatabaseWrapper):
             if not self.get_autocommit():
                 self.connection.commit()
 
-    @async_unsafe
     def create_cursor(self, name=None):
         return self.connection.cursor()
 
