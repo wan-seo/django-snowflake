@@ -1,6 +1,17 @@
-from django.db.models.functions import (
-    Ceil, ConcatPair, StrIndex,
-)
+import django
+
+if django.VERSION[0] >= 3:
+    from django.db.models.functions import (
+        SHA224, SHA256, SHA384, SHA512, Ceil, Collate, ConcatPair, Random,
+        StrIndex,
+    )
+else:
+    from django.db.models.functions import (
+        SHA224, SHA256, SHA384, SHA512, Ceil, Collate, ConcatPair, Random,
+        StrIndex,
+    )
+
+    
 
 
 def ceil(self, compiler, connection, **extra_context):
@@ -40,6 +51,13 @@ def strindex(self, compiler, connection, **extra_context):
 
 
 def register_functions():
+    if django.VERSION[0] >= 3:
+        SHA224.as_snowflake = SHA224.as_mysql
+        SHA256.as_snowflake = SHA256.as_mysql
+        SHA384.as_snowflake = SHA384.as_mysql
+        SHA512.as_snowflake = SHA512.as_mysql
+        Collate.as_snowflake = collate
+        Random.as_snowflake = random
     Ceil.as_snowflake = ceil
     ConcatPair.as_snowflake = concatpair
     StrIndex.as_snowflake = strindex
