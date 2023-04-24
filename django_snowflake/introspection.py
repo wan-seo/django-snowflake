@@ -5,7 +5,7 @@ from collections import namedtuple
 from django.db.backends.base.introspection import (
     BaseDatabaseIntrospection, FieldInfo as BaseFieldInfo, TableInfo,
 )
-if django.VERSION[0] >= 3:
+if django.VERSION >= (3, 2, 0):
     from django.utils.regex_helper import _lazy_re_compile as re_compile
 else:
     from re import compile as re_compile

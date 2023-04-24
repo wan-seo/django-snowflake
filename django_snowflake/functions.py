@@ -1,6 +1,6 @@
 import django
 
-if django.VERSION[0] >= 3:
+if django.VERSION >= (3, 2, 0):
     from django.db.models.functions import (
         SHA224, SHA256, SHA384, SHA512, Ceil, Collate, ConcatPair, Random,
         StrIndex,
@@ -50,7 +50,7 @@ def strindex(self, compiler, connection, **extra_context):
 
 
 def register_functions():
-    if django.VERSION[0] >= 3:
+    if django.VERSION >= (3, 2, 0):
         SHA224.as_snowflake = SHA224.as_mysql
         SHA256.as_snowflake = SHA256.as_mysql
         SHA384.as_snowflake = SHA384.as_mysql
